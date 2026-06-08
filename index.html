@@ -47,7 +47,11 @@
       --r-btn:       12px;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y proximity;
+      scroll-padding-top: 64px;
+    }
 
     body {
       font-family: 'Heebo', sans-serif;
@@ -207,7 +211,7 @@
 
     /* ─── FIRST FOLD ──────────────────────────────────── */
     .first-fold {
-      min-height: 100vh;
+      min-height: calc(100vh - 64px);
       display: flex;
       flex-direction: column;
     }
@@ -392,6 +396,9 @@
     }
 
     /* ─── LAYOUT HELPERS ──────────────────────────────── */
+    .first-fold, .pain-section, .process-band, .addons, .faq {
+      scroll-snap-align: start;
+    }
     .section { padding: clamp(3rem, 5.5vw, 4.5rem) 1.5rem; scroll-margin-top: 64px; }
     .section-inner { max-width: 1160px; margin: 0 auto; }
     .section, .pain-header { scroll-margin-top: 64px; }
