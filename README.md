@@ -117,7 +117,7 @@ bapita-dashboard/               ← separate repo (Next.js app)
 ### Pending manual steps
 | Item | Notes |
 |---|---|
-| **Supabase migration** | `ALTER TABLE businesses ADD COLUMN business_hours JSONB` — see SQL below. Hours + slot logic won't work until this runs. |
+| ~~**Supabase migration**~~ | ✅ Done Jun 10 2026 — `business_hours` JSONB column added to businesses table |
 | **Resend domain verification** | Add bapita.com to resend.com → get DNS records → add to domain registrar. Sender: `noreply@bapita.com` |
 
 ### Not done / next priorities
