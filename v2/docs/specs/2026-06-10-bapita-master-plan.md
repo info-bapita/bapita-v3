@@ -45,7 +45,7 @@ This plan fixes everything in 10 ordered chat sessions. Each session ends with a
 
 - [x] Chat 1 — README & Organization
 - [x] Chat 2 — Design System Document
-- [ ] Chat 3 — App Shell + Login
+- [x] Chat 3 — App Shell + Login
 - [ ] Chat 4 — Calendar
 - [ ] Chat 5 — Clients List + Client Profile
 - [ ] Chat 6 — New Booking Flow
@@ -275,14 +275,20 @@ I'm building Bapita — a done-for-you booking platform for Israeli appointment 
 Read these files first (in order):
 1. /Users/admin/Desktop/bapita/v2/docs/design-system.md  ← REQUIRED before writing any code
 2. /Users/admin/Desktop/bapita-dashboard/src/app/(dashboard)/calendar/page.tsx
-3. /Users/admin/Desktop/bapita-dashboard/src/components/calendar/WeekView.tsx
-4. /Users/admin/Desktop/bapita-dashboard/src/components/calendar/DayView.tsx
-5. /Users/admin/Desktop/bapita-dashboard/src/components/calendar/MonthView.tsx
-6. /Users/admin/Desktop/bapita-dashboard/src/components/calendar/BookingDrawer.tsx
-7. /Users/admin/Desktop/bapita-dashboard/src/types/index.ts
-8. /Users/admin/Desktop/bapita-dashboard/AGENTS.md
+3. /Users/admin/Desktop/bapita-dashboard/src/components/calendar/CalendarChrome.tsx
+4. /Users/admin/Desktop/bapita-dashboard/src/components/calendar/WeekView.tsx
+5. /Users/admin/Desktop/bapita-dashboard/src/components/calendar/DayView.tsx
+6. /Users/admin/Desktop/bapita-dashboard/src/components/calendar/MonthView.tsx
+7. /Users/admin/Desktop/bapita-dashboard/src/components/calendar/BookingDrawer.tsx
+8. /Users/admin/Desktop/bapita-dashboard/src/types/index.ts
+9. /Users/admin/Desktop/bapita-dashboard/AGENTS.md
 
 Design reference: Google Calendar mobile app (UX pattern). Boulevard/GlossGenius (visual quality level).
+
+ALREADY DONE in Chat 3 — do NOT rebuild these:
+- The calendar TOP BAR (☰ + "Month Year ▾" + ⋮ menu) lives in AppShell, NOT in calendar/page.tsx. It is driven by the `CalendarChrome` context. The calendar page publishes its state (monthYear, view, setView, isToday, onToday, openDatePicker, statusFilter, setStatusFilter) via `setChrome(...)` in a useEffect. Do NOT add a top toolbar back into the page — extend the context if you need more controls.
+- The ⋮ menu already provides Day/Week/Month toggle + status filter + Jump to today + Calendar settings link. Status filter is already applied to the views (`visibleBookings`).
+- What's still needed in Chat 4: the WEEK STRIP (swipeable 7-day row), the time grid (px-per-hour, auto-scroll to opening hour), booking-block visuals, tap-empty-slot-to-book, long-press block-time, and the day/week/month view internals. The page currently has NO prev/next arrows (removed with the old toolbar) — the week strip is how the user navigates days now.
 
 Task: Redesign the calendar to match the design system. Fix ALL bugs.
 
