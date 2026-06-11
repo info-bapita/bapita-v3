@@ -8,17 +8,17 @@
 ## 1. Confirmed Strategy (the spine)
 
 ### 1.1 Target market ✅
-- **Lead niche: barbers.** Build the product + website templates around barbers first.
-- Fast-follow: hair salons, nail/lash salons (adjacent, same booking shape).
-- Later: nearby SMBs once templates exist.
-- **Rule:** design barber-first, keep generic enough to not box out salons/SMBs.
+- **First customers: barbers.** Easiest first doors, build momentum + proof here.
+- But **the product and brand serve local service businesses broadly** (salons, nail/lash, trainers, clinics, shops). Barbers are the start, not the ceiling.
+- **Rule:** acquire barbers first, but keep product, dashboard, and homepage generic for any local service business. Never box the brand into barbers only.
+- **Homepage stays broad** (service businesses), never barber niche. See §4.
 
 ### 1.2 Product = 3 layers ✅
 Each layer is its own separate "yes." No layer is forced.
 
 | Layer | What it is | Who controls | Money |
 |-------|-----------|--------------|-------|
-| 1. Website | Done-for-you site + public booking page. Brings customers. Sends booking notification (email/SMS) with customer name + phone. Works 100% standalone. | Rami builds, hands over | One-time build fee |
+| 1. Website | Done for you site + public booking page. Brings customers. Sends booking notification (email/SMS) with customer name + phone. Works 100% standalone. | Rami builds, hands over | One-time build fee |
 | 2. Dashboard | Free optional tool. Barber uses it however they like — glance day/week, OR calendar, OR CRM. | Barber (optional) | Free (the hook) |
 | 3. Add-ons | Payments, reminders, social, reviews, ads. Switch on for extra value. | Barber switches on | Recurring / extra |
 
@@ -45,8 +45,12 @@ Each layer is its own separate "yes." No layer is forced.
 
 ### 1.6 Upsell style ✅ — "Clean + smart nudges"
 - Dashboard stays clean and useful.
-- **One dedicated Add-ons "store" page** (browse + enable everything).
+- **One dedicated Add-ons "store" page** (browse what exists).
 - **PLUS one contextual nudge, only where relevant** (Financials → payments; Insights → ads). No nagware, no lock badges everywhere.
+- **Enabling is manual:** barber sees an add-on, talks to Rami (WhatsApp/in person), Rami turns it on for them. No self-serve billing.
+
+### 1.9 Content / copy rule ✅
+- **Never use the dash character in any customer-facing content** (no `-`, no em dash). Use commas, periods, or rephrase. Applies to homepage, dashboard copy, emails, everywhere.
 
 ### 1.7 Navigation & shell ✅ (locked in competitors.md)
 - **Mobile bottom nav: 4 tabs** — Calendar · Clients · Insights · Financials.
@@ -73,7 +77,7 @@ Repo: `/Users/admin/Desktop/bapita-dashboard/` · pages in `src/app/(dashboard)/
 | **Clients** | Lightweight CRM | Search + client cards (avatar, name, phone, last/next visit) | Add client | none | 🟡 re-skin |
 | **Insights** | Show the business is growing | Revenue hero, 2×2 stat grid, amber bar chart, top services | Date-range chip | → **Paid ads** ("get more bookings") | 🟡 re-skin |
 | **Financials** | Money | If payments OFF: premium "Get paid online" page (CTA). If ON: revenue + payouts + transactions | Connect / view | → **Online payments** (this IS the nudge) | 🟡 re-skin |
-| **Add-ons** | The store | Card per add-on (icon, title, 1-line benefit, Enable). Enabled = amber border + check | Enable add-on → WhatsApp/checkout | n/a (it's the store) | 🟡 build out |
+| **Add-ons** | The store | Card per add-on (icon, title, 1-line benefit, "I want this"). Enabled = amber border + check | "I want this" → WhatsApp to Rami | n/a (it's the store) | 🟡 build out |
 | **Usage** | Prove add-on value | Read-only per-add-on stats (reminders sent, reviews collected, ad spend/results) with thin bars | none | soft "add more" | 🟡 build out |
 | **Settings** | Configure | Tabs: Business · Services · Hours. Slug preview `slug.bapita.com` | Save | none | 🟡 re-skin |
 | **Profile** | Account | Avatar, email, change password, sign out | Save / logout | none | 🟡 re-skin |
@@ -97,8 +101,8 @@ Repo: `/Users/admin/Desktop/bapita-dashboard/` · pages in `src/app/(dashboard)/
 - Payments ON: revenue hero + payouts list + transactions (date, client, amount, status pill).
 
 **Add-ons** (`addons/page.tsx`)
-- Grid of upsell cards, one per catalog item (§1.5). Icon, title, one-line benefit, Enable button.
-- Enabled state: subtle amber border + check. Enable → WhatsApp/checkout (no self-serve billing yet 🟡).
+- Grid of cards, one per catalog item (§1.5). Icon, title, one line benefit, "I want this" button.
+- Enabled state: subtle amber border + check. "I want this" opens WhatsApp to Rami, who enables it. No self-serve billing, by design.
 
 **Usage** (`usage/page.tsx`)
 - Only shows add-ons that are ON. Read-only stat rows + thin progress bars.
@@ -119,31 +123,35 @@ Repo: `/Users/admin/Desktop/bapita-dashboard/` · pages in `src/app/(dashboard)/
 ---
 
 ## 3. Add-ons system — how it ties together
-- **Add-ons page** = browse/enable (the store).
+- **Add-ons page** = browse what exists (the store).
 - **Usage page** = proof of value for what's ON.
 - **Contextual nudges** = exactly two: Financials (payments), Insights (ads). Nowhere else.
-- Enabling today = routes to **WhatsApp/Rami** (manual). Self-serve billing = 🟡 later (Stripe).
+- **Enabling is always manual:** barber taps "I want this" → opens WhatsApp to Rami → Rami enables it on their account. ✅ No self-serve billing, by design.
 
 ---
 
 ## 4. Homepage (bapita.com) — 🟡 PROPOSED structure
-Lead-gen only. No pricing. Barber-first language. CTA everywhere = WhatsApp / free call.
+Lead-gen only. No pricing. **Speaks to local service businesses broadly, not barbers.** No dash character in any copy (§1.9). CTA everywhere = WhatsApp / free call.
 
-1. **Hero:** pain-elimination headline (e.g. "Your barbershop, fully online — done for you.") + phone mockup of a real site. CTA: "Book a free call" (WhatsApp).
-2. **Proof:** real sites you built (portfolio strip) + client names / WhatsApp screenshots.
-3. **What you get:** the 3 layers (Website / free Dashboard / Add-ons) as 3 simple cards.
-4. **Add-ons teaser:** payments, reminders, social, reviews, ads — icon row, "grow when you're ready."
-5. **Why Bapita vs. WhatsApp-chaos / DIY builders:** comparison cards.
+1. **Hero:** headline like "Your business, fully online. Done for you." + phone mockup of a real site. CTA: "Book a free call" (WhatsApp).
+2. **Proof:** real sites you built (portfolio strip) + client names and WhatsApp screenshots.
+3. **What you get:** the 3 layers (Website, free Dashboard, Add-ons) as 3 simple cards.
+4. **Add-ons teaser:** payments, reminders, social, reviews, ads. Icon row, "grow when you're ready."
+5. **Why Bapita:** vs. WhatsApp chaos and DIY builders. Comparison cards.
 6. **FAQ:** addresses "do I have to manage it?" (no), "what does it cost?" (custom, let's talk).
 7. **Final CTA:** WhatsApp.
 
+**Copy note:** keep language industry neutral ("your business," "your shop," "your customers"), so the same homepage works for a barber, a salon, or any local service.
+
 ---
 
-## 5. Door / sales flow — 🟡 PROPOSED (brief)
-1. Pre-build a demo site for the shop (or show a template) **before** talking.
-2. Script: "I already made you this — want it live?" → ask what they need.
-3. Close site (one-time fee). Hand over. Offer dashboard free.
-4. Follow up later with add-ons (reminders/reviews are easiest second sale).
+## 5. Door / sales flow — ✅ (mostly confirmed)
+1. There are **2 to 3 ready templates.** Rami shows them in person; the owner picks one.
+2. Pre-build or show the chosen template **before** the real pitch.
+3. Script: "I already made you this, want it live?" then ask what they need.
+4. Close site (one-time fee). Hand over. Offer dashboard free.
+5. Follow up later with add-ons (reminders and reviews are the easiest second sale).
+6. When they want an add-on, they talk to Rami and he enables it (§3).
 
 ---
 
@@ -168,7 +176,7 @@ Each page: plan → confirm → build → push → Rami checks live. One page at
 ---
 
 ## 8. Open questions (still need decisions)
-- 🟡 Homepage headline + exact copy (§4).
-- 🟡 Self-serve add-on billing (Stripe) vs. WhatsApp-manual — which first?
-- 🟡 Do salons/SMBs get different templates, or one flexible template?
-- 🟡 Sales script wording (§5).
+- 🟡 Homepage headline + exact copy (§4). Want 3 drafted options?
+- 🟡 Exact sales script wording (§5).
+
+**Resolved since v1:** add-on billing = manual via Rami (§3). Templates = 2 to 3 ready templates shown in person (§5). Target = service businesses broadly, barbers first (§1.1).
