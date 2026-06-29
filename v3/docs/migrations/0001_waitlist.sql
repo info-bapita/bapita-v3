@@ -9,6 +9,12 @@ create table if not exists public.waitlist (
   unique (email, product)
 );
 
--- RLS on; only the service role (used by /api/waitlist) can write/read.
+-- RLS on. Public (anon) can INSERT only — no select policy, so emails are not readable
+-- by anon. /api/waitlist uses the publishable anon key.
 alter table public.waitlist enable row level security;
--- No public policies => anon/auth clients cannot read or write. Service role bypasses RLS.
+
+create policy "anon insert waitlist"
+  on public.waitlist
+  for insert
+  to anon
+  with check (true);
