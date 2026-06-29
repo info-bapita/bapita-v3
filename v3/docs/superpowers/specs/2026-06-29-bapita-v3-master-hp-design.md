@@ -11,9 +11,9 @@
 | Item | Decision |
 |---|---|
 | Hero headline | **"Built for you. Run it your way."** |
-| Hero engine | **Higgsfield-generated video loop** background, with poster + graceful fallback |
-| Motion stack | **framer-motion** only (no Lenis, no WebGL/three) |
-| Higgsfield assets | **Hero video only** for now. Bento + sections use CSS motifs + Lucide. Product spot-illos = later pass. |
+| Hero engine | **react-three-fiber 3D + physics** — the "Pita Catch" interactive scene (see §3.3). No AI assets. |
+| Motion stack | **framer-motion + Lenis** (inertial smooth-scroll) |
+| Higgsfield | **Dropped entirely.** Pure code. No credits, no video, better perf, more Gemini-authentic. Bento + sections use CSS motifs + Lucide / hand-drawn SVG. |
 | Logo mark | **Neutral white bowl** icon (recreate bowl/smile as SVG, strip cream card) + white `bapita` wordmark, both `#F4F4F2` |
 | Scope | **Full section-by-section rebuild** |
 | Bento cards | All **5 products**, status badge only (Live / Coming soon), short description. No per-product control-mode tags. |
@@ -52,14 +52,22 @@ The biggest content change. v2 copy leans **hands-off** ("no logins to a complic
 
 ## 3. Architecture & foundations
 
-Stack unchanged: Next 16 App Router, React 19, Tailwind v4 `@theme`, Heebo via `next/font`, lucide-react. **Add `framer-motion`** (one dep).
+Stack unchanged: Next 16 App Router, React 19, Tailwind v4 `@theme`, Heebo via `next/font`, lucide-react.
+
+**New deps:**
+- `framer-motion` (motion) — reveals, stagger, parallax, spring hovers.
+- `lenis` — inertial smooth-scroll.
+- `three`, `@react-three/fiber`, `@react-three/drei`, `@react-three/rapier` — the hero 3D physics scene only.
+
+**Compat note:** verify `@react-three/fiber` v9+ (React 19 support), drei, and rapier install cleanly against React 19 / Next 16 at install time. If r3f/rapier fights the toolchain, fall back to the matter.js 2D canvas variant of the same Pita Catch concept (same interaction, 2D). Do not ship a broken hero.
 
 ### 3.1 Motion layer
 - Replace/augment the custom `Reveal` (IntersectionObserver) with a thin framer-motion wrapper so reveals, stagger, parallax, and spring hovers share one system.
 - New `Reveal` API stays the same (`children`, `delay`, `className`) so call sites don't churn — internals swap to `motion` + `whileInView`.
 - **Reveal spec:** fade + `translateY(16px)` → `0`, 300ms ease-out, children stagger 80ms.
 - **Hover spec (bento):** `translateY(-4px)` + accent glow drop-shadow, 200ms spring.
-- Add a `useReducedMotion` guard — when reduced, disable transforms/parallax/video; show static states.
+- **Lenis:** mount once at the root (client provider), drive `requestAnimationFrame`, sync with framer-motion scroll. Disable when `prefers-reduced-motion`.
+- Add a `useReducedMotion` guard — when reduced, disable transforms/parallax/Lenis/3D; show static states.
 
 ### 3.2 globals.css token completion
 Add v3 tokens currently missing or partial:
@@ -69,12 +77,30 @@ Add v3 tokens currently missing or partial:
 - Spacing: `--section-pad: clamp(4rem,8vw,8rem)`.
 - Keyframes: hero gradient/glow drift (fallback layer), reduced-motion off-switch.
 
-### 3.3 Hero video asset (Higgsfield)
-- Generate **one** abstract motion loop: near-black field, faint slow-drifting colored light-blooms in the five product hues. Premium, subtle, seamless loop, neutral-dark dominant.
-- Output to `/public/hero/` as `.mp4` (+ `.webm` if available) + a **poster** still frame.
-- Playback: `autoplay muted loop playsinline`, `preload="none"` or lazy, poster shown until ready.
-- **Fallbacks (no video / reduced-motion / mobile):** static poster image + a CSS radial-gradient bloom layer. Never block first paint; video is decoration over a complete static hero.
-- Credit guard: watch for Higgsfield limit warning; if hit, ship poster + CSS bloom and swap in video later (Rami can add free accounts for more credits).
+### 3.3 Hero — "The Pita Catch" 3D scene
+
+The signature, most-impressive fold. Branded interactive scene, not a generic gradient. Metaphor: **ba-pita** — the 5 product tools fall into the pita bowl. One toolkit.
+
+**Elements**
+- **5 orbs** = the 5 products, each in its fixed glow hue (`book #F0743A`, `social #2BC487`, `seo #4E86FF`, `outreach #9277FF`, `bots #F2628F`). Soft-glow, slight glassy depth (r3f material + bloom/emissive). Hue is FIXED per product — orbs teach the suite.
+- **The pita** = the white bowl mark, center, just above/below the hero CTA. Acts as the catcher/container.
+- Near-black field (`#0B0B0C`), subtle depth fog.
+
+**Interaction**
+- **Idle:** orbs auto-drift (gentle physics float) + are softly drawn toward the cursor. Hover an orb → it brightens + its product label peeks ("Book", "Social"…).
+- **Click / flick an orb → it falls into the pita.** Bowl catches it; that product's hue flares once.
+- **Drag the field (empty space) → background parallax-shifts** with the drag (draggable scene).
+- **Collect all 5 → the bowl "smiles"/pulses**, headline + CTA emphasize briefly, then orbs respawn and drift again.
+- **Auto-demo:** after ~3s of no input, one orb self-drops into the pita to teach the gesture.
+
+**Tech**
+- `@react-three/fiber` canvas + `@react-three/rapier` for orb bodies, drag constraints, and the pita as a static sensor/catcher. `@react-three/drei` for helpers (Float, bloom, environment).
+- Lazy/client-only (`dynamic(..., { ssr:false })`); the canvas is decoration over a complete static hero (headline/CTA render server-side, never blocked).
+- Cap DPR, pause `requestAnimationFrame` when hero off-screen, bound the physics step.
+
+**Fallbacks (reduced-motion / mobile / no-WebGL)**
+- Static arranged composition: the 5 hued orbs resting in/around the pita, soft CSS glow, no canvas, no physics. Looks intentional, not broken.
+- Touch: tap orb → flies into pita; drag works; no hover-label dependency.
 
 ---
 
@@ -84,12 +110,13 @@ Add v3 tokens currently missing or partial:
 Sticky, `bg-ink/80` + `backdrop-blur-md`, hairline bottom border. New white bowl logo lockup. Links: Products / How it works / Pricing / FAQ. Primary CTA "See the tools" → `#products`. Mobile: blur sheet menu (keep current toggle pattern).
 
 ### 4.2 Hero (most impressive fold)
-- Video-loop background (§3.3) behind a complete static hero.
+- "Pita Catch" 3D scene (§3.3) as the interactive centerpiece, behind/around a complete static hero.
 - Eyebrow: "Digital tools for any business."
 - Display headline **"Built for you. Run it your way."** — `--text-display-xl`, weight 800, tight tracking.
 - Sub: "Some tools run themselves. Some you run in one tap. None need setup, none need an agency."
 - CTAs: primary "See the tools" → `#products`; secondary "How it works" → `#how-it-works`.
-- Entrance: staggered reveal of eyebrow → headline → sub → CTAs. Optional subtle parallax on the bloom layer tied to scroll (disabled on reduced-motion).
+- The pita bowl sits center near the CTA; orbs occupy the field around it.
+- Entrance: staggered reveal of eyebrow → headline → sub → CTAs over the canvas. Scene fades in after mount.
 
 ### 4.3 Social proof
 Keep marquee concept; restyle neutral-premium. Categories/served-types from `SERVED_CATEGORIES`. Quiet, low-contrast, single row.
@@ -121,20 +148,23 @@ Clean closing CTA band (neutral, "See the tools" / "Talk to us" → `mailto`/`#p
 
 ---
 
-## 5. Components touched
+## 5. Components touched / created
 - `ui/brand-mark.tsx` — new white bowl SVG + wordmark.
+- **New `components/hero-scene/`** — r3f canvas, orbs, pita catcher, physics, fallback. Client-only (`dynamic ssr:false`).
+- **New `components/lenis-provider.tsx`** — root smooth-scroll provider.
 - `reveal.tsx` — framer-motion internals, same API, add stagger + reduced-motion.
-- `hero.tsx` — video bg + new copy + parallax.
+- `hero.tsx` — mounts hero-scene + new copy + static fallback.
 - `products-grid.tsx` — bento layout, control-tag-free, tuned hover glow.
 - `how-it-works.tsx` — timeline visual + reworded steps.
 - `navigation.tsx`, `social-proof.tsx`, `who-its-for.tsx`, `pricing.tsx`, `faq.tsx`, `footer.tsx` — restyle pass + copy edits where noted.
+- `layout.tsx` — wrap in LenisProvider.
 - `globals.css` — token completion + keyframes.
-- New: `/public/hero/` assets.
 
 ## 6. Out of scope (YAGNI / later)
-- Product spot-illustrations (5) — later Higgsfield pass.
+- Product spot-illustrations (5) — later pass, CSS motifs for now.
 - Subdomain/product pages — separate specs.
 - Region migration, Stripe, analytics — unrelated.
+- Higgsfield / any AI-generated assets — dropped.
 
 ## 7. Verification
 - `npm run build` + `eslint` clean.
@@ -145,6 +175,7 @@ Clean closing CTA band (neutral, "See the tools" / "Talk to us" → `mailto`/`#p
 ---
 
 ## 8. Risks
-- **Hero video weight / perf** — mitigated by poster-first, lazy, reduced-motion + mobile fallback to static.
-- **Higgsfield free limit** — mitigated by single asset + poster/CSS fallback; can swap video in later.
-- **framer-motion + React 19 / Next 16** — verify version compat at install; fall back to CSS reveals if incompatible.
+- **r3f/rapier weight + perf** — mitigated by client-only lazy mount, DPR cap, pause-off-screen, bounded physics, static fallback. Hero never blocks paint.
+- **r3f/rapier/drei vs React 19 / Next 16 compat** — verify at install; if it fights, fall back to matter.js 2D canvas variant of the same Pita Catch interaction.
+- **framer-motion + Lenis on React 19 / Next 16** — verify at install; fall back to CSS reveals + native scroll if incompatible.
+- **Bundle size** — three stack is heavy; keep it isolated to the hero chunk (dynamic import), not the global bundle.
