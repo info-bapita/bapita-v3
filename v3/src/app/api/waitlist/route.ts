@@ -41,7 +41,9 @@ export async function POST(req: Request) {
       "Content-Type": "application/json",
       apikey: key,
       Authorization: `Bearer ${key}`,
-      Prefer: "resolution=merge-duplicates,return=minimal",
+      // Plain insert. A repeat email+product hits the unique constraint and
+      // returns 409, which we treat as success below (no UPDATE perm needed).
+      Prefer: "return=minimal",
     },
     body: JSON.stringify({ email, product: product || null }),
   });
