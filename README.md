@@ -189,3 +189,14 @@ curl -X POST "https://$REF.supabase.co/functions/v1/publish-due-posts" \
 
 ### Querying this Supabase project (MCP can't reach it — wrong account)
 Use the Management API with the CLI's PAT (macOS keychain): `security find-generic-password -s "Supabase CLI" -w` → strip `go-keyring-base64:` prefix → base64 -d → Bearer token for `POST https://api.supabase.com/v1/projects/hgvzskfmxlgjubjhnjlj/database/query`.
+
+### Timezone — TWO separate concerns (both fixed 2026-06-30)
+- **Input/storage:** `datetime-local` has no zone; the UTC Vercel server was storing wall-clock as UTC. Fixed in `compose-form.tsx` by converting to UTC ISO in the browser before submit.
+- **Output/display:** dashboard + posts are **Server Components** rendered on Vercel (UTC), so `toLocaleString(undefined)` printed UTC. Fixed with a client `components/local-time.tsx` (`<LocalTime iso=… />`) that formats in the browser's zone (`suppressHydrationWarning` for the expected server/client text diff). **If you add any new place that shows a post time, use `<LocalTime>` — never format dates in a Server Component.** (Calendar grid grouping in `lib/calendar.ts` still uses server-local date math; low priority, but it can mis-bucket near midnight — convert there too if it matters.)
+
+### Architecture notes / future improvements (read before extending)
+- **Edge function deploy is separate from Vercel.** `git push` deploys the Next app (Vercel). The Supabase edge function deploys only via `supabase functions deploy publish-due-posts --project-ref hgvzskfmxlgjubjhnjlj`. Forgetting this = stale function in prod.
+- **Token refresh is manual today.** No UI re-auth/exchange flow. Next build: a connect flow that does short→long-lived exchange + stores the page token automatically, plus a daily cron to refresh before expiry. Until then, tokens must be re-stored by hand (see runbook above).
+- **Image upload streams through the Server Action** (15MB limit). Fine for now; if posts get heavy, move to direct browser→Storage upload (signed URL) and pass only the URL to the action.
+- **No status feedback after scheduling.** A failed publish only shows on the Posts page (`error` column). Consider surfacing failures on the dashboard / a notification.
+- **`processed` count in the edge function** counts due rows, not successes. A row can be `processed` yet `failed` — check the `posts.status`/`error`, not the function's return.
