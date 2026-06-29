@@ -27,15 +27,15 @@ const sizeClasses: Record<Size, string> = {
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-ink text-cream hover:bg-ink/85 active:bg-ink/95 shadow-soft",
+    "bg-cream text-ink hover:bg-cream/90 active:bg-cream/95 shadow-soft",
   ghost:
-    "bg-transparent text-ink/75 hover:bg-ink/[0.06] hover:text-ink active:bg-ink/10",
+    "bg-transparent text-cream/75 hover:bg-cream/[0.08] hover:text-cream active:bg-cream/10",
   outline:
-    "bg-transparent border border-ink/20 text-ink hover:bg-ink/[0.05] active:bg-ink/10",
+    "bg-transparent border border-cream/20 text-cream hover:bg-cream/[0.06] active:bg-cream/10",
 };
 
 const base =
-  "inline-flex items-center justify-center rounded-pill font-semibold leading-none tracking-[-0.01em] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-40 select-none whitespace-nowrap";
+  "inline-flex items-center justify-center rounded-pill font-semibold leading-none tracking-[-0.01em] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cream focus-visible:ring-offset-2 focus-visible:ring-offset-ink disabled:pointer-events-none disabled:opacity-40 select-none whitespace-nowrap";
 
 export function Button({
   size = "md",

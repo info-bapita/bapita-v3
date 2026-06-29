@@ -1,11 +1,13 @@
 import type { ProductId } from "@/lib/products";
 
+// Glow variants — each product color tuned to read on the dark hub (#0b0b0c).
+// See docs/brand/bapita-v3-brand-system.md §2.2.
 const ACCENT_MAP: Record<ProductId, string> = {
-  book: "#d4622a",
-  social: "#e8920a",
-  seo: "#3c7a52",
-  outreach: "#1a7a7a",
-  bots: "#5b5f97",
+  book: "#f0743a",
+  social: "#2bc487",
+  seo: "#4e86ff",
+  outreach: "#9277ff",
+  bots: "#f2628f",
 };
 
 /**

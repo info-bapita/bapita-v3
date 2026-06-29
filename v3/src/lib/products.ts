@@ -34,7 +34,7 @@ export const PRODUCTS: Product[] = [
     status: "live",
     statusLabel: "Live",
     href: "https://book.bapita.com",
-    pricingNote: "From $29/mo",
+    pricingNote: "Available now",
     pricingCta: "See plans",
     features: [
       "Booking website with your brand",
@@ -52,7 +52,7 @@ export const PRODUCTS: Product[] = [
     status: "soon",
     statusLabel: "Coming soon",
     href: "https://social.bapita.com",
-    pricingNote: "From $19/mo",
+    pricingNote: "Launching next",
     pricingCta: "Get notified",
     features: [
       "Post scheduler & content calendar",
@@ -70,7 +70,7 @@ export const PRODUCTS: Product[] = [
     status: "soon",
     statusLabel: "Coming soon",
     href: "https://seo.bapita.com",
-    pricingNote: "From $19/mo",
+    pricingNote: "Coming soon",
     pricingCta: "Get notified",
     features: [
       "Keyword research & clustering",
@@ -88,7 +88,7 @@ export const PRODUCTS: Product[] = [
     status: "soon",
     statusLabel: "Coming soon",
     href: "https://outreach.bapita.com",
-    pricingNote: "From $29/mo",
+    pricingNote: "Coming soon",
     pricingCta: "Get notified",
     features: [
       "Link building automation",
@@ -106,7 +106,7 @@ export const PRODUCTS: Product[] = [
     status: "soon",
     statusLabel: "Coming soon",
     href: "https://bots.bapita.com",
-    pricingNote: "From $19/mo",
+    pricingNote: "Coming soon",
     pricingCta: "Get notified",
     features: [
       "WhatsApp chatbot",

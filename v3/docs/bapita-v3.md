@@ -4,6 +4,39 @@
 
 ---
 
+> ## ⚠️ v3.1 Reality & Direction Update (June 29, 2026)
+>
+> This document is the **vision / north star**. The parts below were written aspirationally;
+> the real near-term plan is narrower. Read this banner first — where it conflicts with the body,
+> the banner wins.
+>
+> **Reality:**
+> - **0 paying customers.** Book is *built and usable* but has **no paying users** (the §2 table
+>   saying "mature, paying customers" is aspirational — Book is "live/usable, 0 paying").
+> - **Solo founder, ~2–3 month runway.** No team for 5 products.
+> - **Reachable markets: Israel + Turkey SMBs**, sold by hand in Hebrew/Turkish. Product UI is
+>   English-first, but the *sale* is local-language.
+>
+> **Focus decision — build 2, waitlist 3, sell by hand:**
+> - **Real now:** Book (live) + Social (finishing to production).
+> - **Waitlist only:** SEO, Outreach, Bots — hub card + "Get notified," no build until demand.
+> - **GTM:** founder-led / done-with-you sales first (not self-serve). Self-serve is the
+>   *delivery*, not the acquisition engine. See `docs/bapita-v3-gtm.md`.
+>
+> **Brand/design direction change (supersedes §3–§6 specifics):**
+> - The brand is now **two layers**: a **neutral premium DARK** master hub (`bapita.com`,
+>   near-black) + **light, colorful product worlds** per subdomain. The warm terracotta is **no
+>   longer the master color — it's Book's color.**
+> - **One structural design system + 5 skins.** Each product = accent color + icon **motif** +
+>   one hero illustration. **No bespoke mascots / per-product layouts** (dropped as unmaintainable
+>   solo). The "unique vibe / illustration style / typography mood" idea in §3 is shelved.
+> - New product color wheel: **Book orange `#D4622A`, Social emerald `#1FA971`, SEO azure
+>   `#2D6CF0`, Outreach violet `#7C5CFC`, Bots magenta `#E0457B`** (replaces the old
+>   terracotta/amber/forest/teal/indigo map — which was also mis-wired in code).
+> - **Source of truth for all design is now `docs/brand/bapita-v3-brand-system.md`.**
+
+---
+
 ## Table of Contents
 1. [Strategic Pivot](#1-strategic-pivot)
 2. [Product Architecture](#2-product-architecture)
@@ -77,7 +110,7 @@ bapita.com              → Master brand page (product hub)
 
 | Product | Status | Priority | Team |
 |---------|--------|----------|------|
-| Book | ✅ Live (mature, paying customers) | 1 - Core revenue | Existing |
+| Book | ✅ Live/usable, **0 paying customers** | 1 - First revenue target | Solo |
 | Social | 🚧 In development (under construction on social-ops-platform) | 2 - Next launch | Current |
 | SEO | 📋 Planned | 3 | — |
 | Outreach | 📋 Planned | 4 | — |

@@ -17,9 +17,9 @@ export function Navigation() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-ink/[0.06] bg-cream/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-cream/[0.08] bg-ink/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
-        <a href="/" aria-label="Bapita home">
+        <a href="/" aria-label="Bapita home" className="text-cream">
           <BrandMark />
         </a>
 
@@ -29,7 +29,7 @@ export function Navigation() {
             <a
               key={link.label}
               href={link.href}
-              className="text-sm font-medium text-ink/65 transition-colors hover:text-ink"
+              className="text-sm font-medium text-cream/65 transition-colors hover:text-cream"
             >
               {link.label}
             </a>
@@ -45,14 +45,14 @@ export function Navigation() {
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
-          {open ? <X className="h-5 w-5 text-ink" /> : <Menu className="h-5 w-5 text-ink" />}
+          {open ? <X className="h-5 w-5 text-cream" /> : <Menu className="h-5 w-5 text-cream" />}
         </button>
       </div>
 
       {/* Mobile menu */}
       <div
         className={cn(
-          "overflow-hidden border-t border-ink/[0.06] transition-all duration-300 md:hidden",
+          "overflow-hidden border-t border-cream/[0.08] transition-all duration-300 md:hidden",
           open ? "max-h-80" : "max-h-0"
         )}
       >
@@ -62,7 +62,7 @@ export function Navigation() {
               key={link.label}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="rounded-card px-3 py-2.5 text-sm font-medium text-ink/65 transition-colors hover:bg-ink/[0.04] hover:text-ink"
+              className="rounded-card px-3 py-2.5 text-sm font-medium text-cream/65 transition-colors hover:bg-cream/[0.06] hover:text-cream"
             >
               {link.label}
             </a>

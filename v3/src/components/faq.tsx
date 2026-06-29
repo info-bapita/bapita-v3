@@ -12,7 +12,7 @@ const FAQS = [
   },
   {
     q: "How is Bapita different from using Calendly, Buffer, or other tools directly?",
-    a: "Those tools are built for people who want to configure software. Bapita is built for people who want the outcome without the configuration. We set everything up to match your business, connect your accounts, write your copy, and keep it running. You also get all five tools under one roof instead of five different subscriptions.",
+    a: "Those tools are built for people who want to configure software. Bapita is built for people who want the outcome without the configuration. We set everything up to match your business, connect your accounts, write your copy, and keep it running. As the suite grows, you get more tools that share the same approach — pick only the ones you need.",
   },
   {
     q: "What does '48 hours' actually mean for Bapita Book?",
@@ -24,7 +24,7 @@ const FAQS = [
   },
   {
     q: "When will the other tools (Social, SEO, Outreach, Bots) launch?",
-    a: "Social is in final testing now. SEO and Outreach are in development. Bots is in early access. The best way to get early access is to join the notify list for each product on this page.",
+    a: "Book is live today. Social is in active development and launches next. SEO, Outreach, and Bots are on the roadmap after that. The best way to get early access — and a founding-customer price — is to join the notify list for each product on this page.",
   },
   {
     q: "Is my data safe? What happens to my client information?",
@@ -40,18 +40,18 @@ function FAQItem({ q, a, defaultOpen = false }: { q: string; a: string; defaultO
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <div className="border-b border-ink/[0.08]">
+    <div className="border-b border-cream/[0.08]">
       <button
         className="flex w-full items-start justify-between gap-4 py-5 text-left"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
       >
-        <span className="font-semibold text-[0.9375rem] leading-snug text-ink">{q}</span>
-        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ink/[0.06]">
+        <span className="font-semibold text-[0.9375rem] leading-snug text-cream">{q}</span>
+        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-cream/[0.08]">
           {open ? (
-            <Minus className="h-3.5 w-3.5 text-ink/60" />
+            <Minus className="h-3.5 w-3.5 text-cream/60" />
           ) : (
-            <Plus className="h-3.5 w-3.5 text-ink/60" />
+            <Plus className="h-3.5 w-3.5 text-cream/60" />
           )}
         </span>
       </button>
@@ -61,7 +61,7 @@ function FAQItem({ q, a, defaultOpen = false }: { q: string; a: string; defaultO
           open ? "max-h-96 pb-5" : "max-h-0"
         )}
       >
-        <p className="text-[0.9rem] leading-relaxed text-ink/60">{a}</p>
+        <p className="text-[0.9rem] leading-relaxed text-cream/60">{a}</p>
       </div>
     </div>
   );
@@ -69,14 +69,14 @@ function FAQItem({ q, a, defaultOpen = false }: { q: string; a: string; defaultO
 
 export function FAQ() {
   return (
-    <section id="faq" className="bg-surface py-24 sm:py-32">
+    <section id="faq" className="wash-sand py-24 sm:py-32">
       <div className="mx-auto max-w-3xl px-5 sm:px-8">
         <Reveal>
           <div className="mb-12 text-center">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-ink/40">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-cream/40">
               FAQ
             </p>
-            <h2 className="text-display-lg font-extrabold leading-[1.08] tracking-tight text-ink">
+            <h2 className="text-display-lg font-extrabold leading-[1.08] tracking-tight text-cream">
               Questions we get a lot.
             </h2>
           </div>
@@ -91,11 +91,11 @@ export function FAQ() {
         </Reveal>
 
         <Reveal delay={120}>
-          <p className="mt-10 text-center text-sm text-ink/45">
+          <p className="mt-10 text-center text-sm text-cream/45">
             Something else on your mind?{" "}
             <a
               href="mailto:hello@bapita.com"
-              className="font-semibold text-ink/70 underline underline-offset-2 hover:text-ink"
+              className="font-semibold text-cream/70 underline underline-offset-2 hover:text-cream"
             >
               Email us
             </a>

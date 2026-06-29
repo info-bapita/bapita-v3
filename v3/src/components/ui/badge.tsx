@@ -10,9 +10,9 @@ interface BadgeProps {
 }
 
 const variantClasses: Record<BadgeVariant, string> = {
-  neutral: "bg-ink/[0.07] text-ink/60",
-  live: "bg-seo/15 text-seo",
-  soon: "bg-social/15 text-social",
+  neutral: "bg-cream/[0.08] text-cream/60",
+  live: "bg-success/15 text-success",
+  soon: "bg-warning/15 text-warning",
 };
 
 export function Badge({ variant = "neutral", children, className }: BadgeProps) {

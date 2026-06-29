@@ -18,13 +18,13 @@ export function WhoItsFor() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <Reveal>
           <div className="mb-12 max-w-xl">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-ink/40">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-cream/40">
               Who it&apos;s for
             </p>
-            <h2 className="text-display-lg font-extrabold leading-[1.08] tracking-tight text-ink">
+            <h2 className="text-display-lg font-extrabold leading-[1.08] tracking-tight text-cream">
               Built for the business you actually run.
             </h2>
-            <p className="mt-4 text-lg leading-relaxed text-ink/60">
+            <p className="mt-4 text-lg leading-relaxed text-cream/55">
               Pick your business type and see which tools fit.
             </p>
           </div>
@@ -41,17 +41,17 @@ export function WhoItsFor() {
                   className={cn(
                     "group flex flex-col gap-0.5 rounded-card border px-5 py-4 text-left transition-all duration-150",
                     activeId === biz.id
-                      ? "border-ink/20 bg-surface shadow-soft"
-                      : "border-transparent hover:bg-ink/[0.04]"
+                      ? "border-cream/15 bg-surface shadow-soft"
+                      : "border-transparent hover:bg-cream/[0.04]"
                   )}
                 >
                   <span className={cn(
                     "font-semibold text-[0.9375rem] transition-colors",
-                    activeId === biz.id ? "text-ink" : "text-ink/65 group-hover:text-ink"
+                    activeId === biz.id ? "text-cream" : "text-cream/65 group-hover:text-cream"
                   )}>
                     {biz.label}
                   </span>
-                  <span className="text-sm text-ink/40">{biz.example}</span>
+                  <span className="text-sm text-cream/40">{biz.example}</span>
                 </button>
               ))}
             </div>
@@ -60,7 +60,7 @@ export function WhoItsFor() {
           {/* Matching tools */}
           <Reveal delay={60}>
             <div className="flex flex-col gap-4">
-              <p className="text-sm font-semibold uppercase tracking-[0.12em] text-ink/40">
+              <p className="text-sm font-semibold uppercase tracking-[0.12em] text-cream/45">
                 Recommended tools
               </p>
               <div className="flex flex-col gap-3">
@@ -71,7 +71,7 @@ export function WhoItsFor() {
                       key={product.id}
                       href={`#${product.id}`}
                       style={accentStyle(product.id)}
-                      className="flex items-start gap-4 rounded-card border border-ink/[0.08] bg-surface p-5 shadow-soft transition-shadow hover:shadow-lift"
+                      className="product-card flex items-start gap-4 rounded-card border border-cream/[0.08] bg-surface p-5 shadow-soft"
                     >
                       <span className="accent-wash accent-text flex h-10 w-10 shrink-0 items-center justify-center rounded-[11px]">
                         <Icon className="h-5 w-5" />
@@ -80,7 +80,7 @@ export function WhoItsFor() {
                         <p className="accent-text font-bold text-[0.9375rem]">
                           Bapita {product.name}
                         </p>
-                        <p className="mt-0.5 text-sm leading-snug text-ink/55">
+                        <p className="mt-0.5 text-sm leading-snug text-cream/55">
                           {product.tagline}
                         </p>
                       </div>

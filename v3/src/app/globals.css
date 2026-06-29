@@ -1,34 +1,52 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Base palette */
-  --color-ink: #1e1a14;
-  --color-cream: #fbf7f1;
+  /* ── Neutral system (premium dark hub) ── */
+  --color-ink: #0b0b0c;        /* hub page background (darkest) */
+  --color-ink-800: #141416;    /* raised dark surfaces, nav */
+  --color-ink-700: #1e1e22;    /* hairline base on dark */
+  --color-surface: #16161a;    /* cards on dark */
+  --color-cream: #f4f4f2;      /* primary text / marks on dark */
+  --color-paper: #fafaf8;      /* light product-page surface (subdomains) */
 
-  /* Tool accent colors */
-  --color-booking: #d4622a;
-  --color-social: #5b5f97;
-  --color-seo: #3c7a52;
-  --color-outreach: #1a7a7a;
-  --color-bots: #e8920a;
+  /* ── Product color wheel ── */
+  --color-book: #d4622a;       /* orange / terracotta */
+  --color-social: #1fa971;     /* emerald */
+  --color-seo: #2d6cf0;        /* azure */
+  --color-outreach: #7c5cfc;   /* violet */
+  --color-bots: #e0457b;       /* magenta */
+
+  /* glow variants — the product color tuned to read on #0b0b0c */
+  --color-book-glow: #f0743a;
+  --color-social-glow: #2bc487;
+  --color-seo-glow: #4e86ff;
+  --color-outreach-glow: #9277ff;
+  --color-bots-glow: #f2628f;
+
+  /* ── Semantic ── */
+  --color-success: #2bc487;
+  --color-warning: #e8920a;
+  --color-danger: #d64545;
 
   /* Aliases */
-  --color-background: var(--color-cream);
-  --color-foreground: var(--color-ink);
+  --color-background: var(--color-ink);
+  --color-foreground: var(--color-cream);
 
   /* Typography */
   --font-sans: var(--font-heebo), ui-sans-serif, system-ui, sans-serif;
 
-  /* Border radius */
+  /* Radii */
   --radius-card: 0.875rem;
+  --radius-field: 0.625rem;
   --radius-pill: 9999px;
 
-  /* Shadows */
-  --shadow-soft: 0 1px 3px rgba(30, 26, 20, 0.06),
-    0 1px 2px rgba(30, 26, 20, 0.04);
+  /* Shadows (tuned for dark) */
+  --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-lift: 0 14px 40px rgba(0, 0, 0, 0.45);
 
-  /* Font sizes */
+  /* Display sizes */
   --text-display-xl: 3.5rem;
+  --text-display-lg: 2.5rem;
 }
 
 @layer base {
@@ -38,15 +56,63 @@
     box-sizing: border-box;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    background: var(--color-cream);
-    color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-cream);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+}
 
-  html {
-    scroll-behavior: smooth;
+@layer utilities {
+  /* ── Per-product accent (set --accent inline via accentStyle) ── */
+  .accent-text {
+    color: var(--accent);
+  }
+  .accent-wash {
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+
+  /* ── Dark washes: subtle vertical lifts of the hub bg ── */
+  .wash-cream {
+    background: linear-gradient(to bottom, #0b0b0c, #141416);
+  }
+  .wash-sand {
+    background: linear-gradient(to bottom, #141416, #0b0b0c);
+  }
+
+  /* ── Product card hover glow ── */
+  .product-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45),
+      0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  /* ── Social-proof marquee ── */
+  .marquee-track {
+    animation: marquee 38s linear infinite;
+    width: max-content;
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
   }
 }

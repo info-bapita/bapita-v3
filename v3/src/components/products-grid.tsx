@@ -13,14 +13,14 @@ export function ProductsGrid() {
         {/* Section header */}
         <Reveal>
           <div className="mb-14 max-w-2xl">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-ink/40">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-cream/40">
               The suite
             </p>
-            <h2 className="text-display-lg font-extrabold leading-[1.08] tracking-tight text-ink">
+            <h2 className="text-display-lg font-extrabold leading-[1.08] tracking-tight text-cream">
               Five tools, one toolkit.
             </h2>
-            <p className="mt-4 text-lg leading-relaxed text-ink/60">
-              Each product is built to do one thing exceptionally well. Use one, or use all five — they share the same login, the same language, and the same pricing philosophy.
+            <p className="mt-4 text-lg leading-relaxed text-cream/55">
+              Each product is built to do one thing exceptionally well. Use one, or use all five — same warm, plain-spoken approach, same pricing philosophy, no bundle lock-in.
             </p>
           </div>
         </Reveal>
@@ -36,7 +36,7 @@ export function ProductsGrid() {
                 <div
                   id={product.id}
                   style={accentStyle(product.id)}
-                  className="product-card flex h-full flex-col rounded-card border border-ink/[0.08] bg-surface p-6 shadow-soft transition-shadow duration-200 hover:shadow-lift"
+                  className="product-card flex h-full flex-col rounded-card border border-cream/[0.08] bg-surface p-6 shadow-soft"
                 >
                   {/* Icon + badge row */}
                   <div className="mb-5 flex items-start justify-between gap-3">
@@ -52,14 +52,14 @@ export function ProductsGrid() {
                   <h3 className="accent-text text-[1.05rem] font-bold tracking-tight">
                     Bapita {product.name}
                   </h3>
-                  <p className="mt-1.5 text-[0.9rem] leading-snug text-ink/60">
+                  <p className="mt-1.5 text-[0.9rem] leading-snug text-cream/55">
                     {product.tagline}
                   </p>
 
                   {/* Features */}
                   <ul className="mt-5 flex flex-col gap-2.5">
                     {product.features.map((feat) => (
-                      <li key={feat} className="flex items-start gap-2.5 text-sm text-ink/75">
+                      <li key={feat} className="flex items-start gap-2.5 text-sm text-cream/70">
                         <Check className="accent-text mt-0.5 h-4 w-4 shrink-0" />
                         {feat}
                       </li>

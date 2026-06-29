@@ -13,12 +13,12 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer id="about" className="border-t border-ink/[0.08] bg-ink">
+    <footer id="about" className="border-t border-cream/[0.08] bg-ink-800">
       <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr]">
           {/* Brand */}
           <div>
-            <BrandMark className="brightness-0 invert opacity-90" />
+            <BrandMark className="text-cream opacity-90" />
             <p className="mt-4 max-w-[280px] text-[0.875rem] leading-relaxed text-cream/45">
               A suite of digital tools for businesses that want to run better online — without hiring an agency.
             </p>
