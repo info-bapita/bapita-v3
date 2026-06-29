@@ -13,6 +13,7 @@
 
   /* ── Product color wheel ── */
   --color-book: #d4622a;       /* orange / terracotta */
+  --color-analytics: #16A6B3;  /* teal */
   --color-social: #1fa971;     /* emerald */
   --color-seo: #2d6cf0;        /* azure */
   --color-outreach: #7c5cfc;   /* violet */
@@ -20,10 +21,21 @@
 
   /* glow variants — the product color tuned to read on #0b0b0c */
   --color-book-glow: #f0743a;
+  --color-analytics-glow: #26c6d4;
   --color-social-glow: #2bc487;
   --color-seo-glow: #4e86ff;
   --color-outreach-glow: #9277ff;
   --color-bots-glow: #f2628f;
+
+  /* ── Clay / warm light (hero, brand surfaces on light) ── */
+  --color-clay: #FBF7EF;       /* lightest cream surface */
+  --color-clay-warm: #F7E8D6;  /* mid warm */
+  --color-clay-toast: #F3D8BC; /* deep toast */
+  --color-espresso: #2A1D14;   /* dark warm text / CTA */
+  --color-espresso-muted: #3a2c20; /* secondary text */
+  --color-cinnamon: #9a5a3c;   /* warm accent text / spice */
+  --color-bowl-tan: #c8893f;   /* toasted pita bowl */
+  --color-bowl-dark: #6e3f17;  /* bowl inner shadow */
 
   /* ── Semantic ── */
   --color-success: #2bc487;
